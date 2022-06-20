@@ -24,18 +24,9 @@ async function seed() {
     },
   });
 
-  await prisma.note.create({
+  await prisma.dayOff.create({
     data: {
-      title: "My first note",
-      body: "Hello, world!",
-      userId: user.id,
-    },
-  });
-
-  await prisma.note.create({
-    data: {
-      title: "My second note",
-      body: "Hello, world!",
+      date: "2022-06-20T20:17:40Z",
       userId: user.id,
     },
   });
