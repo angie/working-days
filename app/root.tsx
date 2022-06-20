@@ -17,12 +17,15 @@ import tailwindStylesheetUrl from "./styles/tailwind.css";
 import { getUser } from "./session.server";
 
 export const links: LinksFunction = () => {
-  return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
+  return [
+    { rel: "stylesheet", href: tailwindStylesheetUrl },
+    { rel: "stylesheet", href: "https://use.typekit.net/ycc4abi.css" },
+  ];
 };
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "Remix Notes",
+  title: "working days",
   viewport: "width=device-width,initial-scale=1",
 });
 
