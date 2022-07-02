@@ -103,7 +103,7 @@ export default function TodayPage() {
                     defaultChecked={isWorking}
                     onClick={onChangeHandler}
                   />
-                  <div className="peer h-10 w-20 rounded-full bg-gray-200 after:absolute after:top-1 after:left-[2px] after:h-8 after:w-8 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-[130%] peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800"></div>
+                  <div className="peer h-11 w-[100px] rounded-full border-4 border-black after:absolute after:top-1.5 after:left-[6px] after:h-8 after:w-8 after:rounded-full after:border-4 after:border-black after:bg-morning-glory after:transition-all after:content-[''] peer-checked:bg-persian-pink-200 peer-checked:after:translate-x-[175%] peer-focus:ring-4 peer-focus:ring-persian-pink-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800"></div>
                   <span className="sr-only ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
                     Did you work today?
                   </span>
