@@ -3,6 +3,9 @@ module.exports = {
   content: ["./app/**/*.{ts,tsx,jsx,js}"],
   theme: {
     extend: {
+      boxShadow: {
+        solid: "6px 6px 0px 0px #000000",
+      },
       colors: {
         cerise: {
           50: "#fdfcfa",

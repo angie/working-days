@@ -41,7 +41,7 @@ export default function TodayPage() {
 
   const onChangeHandler = (event: React.FormEvent<HTMLInputElement>): void => {
     const target = event.target as HTMLInputElement;
-    const action = target.value === "off" ? "add" : "delete";
+    const action = target.checked ? "delete" : "add";
 
     dayOff.submit(dayOff.data, {
       method: "post",
@@ -71,52 +71,53 @@ export default function TodayPage() {
           </button>
         </Form>
       </header>
-      <dayOff.Form
-        method="post"
-        action="/day-off/add"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 8,
-          width: "100%",
-        }}
-      >
-        <div>
-          <label className="flex w-full flex-col gap-1">
-            <span>Did you work today?</span>
-            <span className="text-6xl">{isWorking ? "👩‍💻" : "🏝"}</span>
-            <fieldset>
-              <div>
-                <input
-                  type="radio"
-                  id="worked"
-                  name="worked"
-                  value="worked"
-                  defaultChecked={isWorking}
-                  onChange={onChangeHandler}
-                />
-                <label htmlFor="worked">Yes</label>
-              </div>
-              <div>
-                <input
-                  type="radio"
-                  id="off"
-                  name="worked"
-                  value="off"
-                  defaultChecked={!isWorking}
-                  onChange={onChangeHandler}
-                />
-                <label htmlFor="off">No</label>
-              </div>
-            </fieldset>
-          </label>
-          {actionData?.errors?.date && (
-            <div className="pt-1 text-red-700" id="date-error">
-              {actionData.errors.date}
-            </div>
-          )}
+      <main className="drop-shadow-solid relative mt-12 flex justify-center p-4 text-3xl sm:mt-24">
+        <div className="w-11/12 rounded-lg border-2 border-black shadow-solid sm:w-3/5">
+          <div className="p-4 pb-8">
+            <dayOff.Form
+              method="post"
+              action="/day-off/add"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 8,
+                width: "100%",
+              }}
+            >
+              <h1 className="pb-4 font-bold text-persian-pink-500 sm:pb-8">
+                Did you work today?
+              </h1>
+              <span className="flex justify-center pb-4 text-6xl sm:pb-8">
+                {isWorking ? "YES" : "NO"}
+              </span>
+              <fieldset className="flex justify-center gap-3">
+                <label
+                  htmlFor="checked-toggle"
+                  className="relative inline-flex cursor-pointer items-center "
+                >
+                  <input
+                    type="checkbox"
+                    value="working"
+                    id="checked-toggle"
+                    className="peer sr-only"
+                    defaultChecked={isWorking}
+                    onClick={onChangeHandler}
+                  />
+                  <div className="peer h-10 w-20 rounded-full bg-gray-200 after:absolute after:top-1 after:left-[2px] after:h-8 after:w-8 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-[130%] peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800"></div>
+                  <span className="sr-only ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                    Did you work today?
+                  </span>
+                </label>
+              </fieldset>
+              {actionData?.errors?.date && (
+                <div className="pt-1 text-red-700" id="date-error">
+                  {actionData.errors.date}
+                </div>
+              )}
+            </dayOff.Form>
+          </div>
         </div>
-      </dayOff.Form>
+      </main>
     </div>
   );
 }

@@ -29,11 +29,15 @@ describe("smoke tests", () => {
     cy.visit("/");
 
     cy.findByRole("link", { name: /did you work today?/i }).click();
-    cy.findByText("Did you work today?");
 
-    cy.findByRole("radio", { name: /no/i, checked: false }).click();
-    cy.findByText("🏝");
-    cy.findByRole("radio", { name: /yes/i, checked: false }).click();
-    cy.findByText("👩‍💻");
+    cy.findByText("YES");
+    cy.findByRole("checkbox", { name: /did you work today?/i }).click({
+      force: true,
+    });
+    cy.findByText("NO");
+    cy.findByRole("checkbox", { name: /did you work today?/i }).click({
+      force: true,
+    });
+    cy.findByText("YES");
   });
 });
