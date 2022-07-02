@@ -15,6 +15,15 @@ export function getNote({
   });
 }
 
+export function getDayOffByDate({
+  userId,
+  date,
+}: Pick<DayOff, "userId" | "date">) {
+  return prisma.dayOff.findFirst({
+    where: { userId, date },
+  });
+}
+
 export function getDaysOff({ userId }: { userId: User["id"] }) {
   return prisma.dayOff.findMany({
     where: { userId },
@@ -23,7 +32,7 @@ export function getDaysOff({ userId }: { userId: User["id"] }) {
   });
 }
 
-export function createNote({
+export function addDayOff({
   date,
   userId,
 }: Pick<DayOff, "date"> & {
@@ -41,11 +50,11 @@ export function createNote({
   });
 }
 
-export function deleteNote({
-  id,
+export function deleteDayOff({
+  date,
   userId,
-}: Pick<DayOff, "id"> & { userId: User["id"] }) {
+}: Pick<DayOff, "date"> & { userId: User["id"] }) {
   return prisma.dayOff.deleteMany({
-    where: { id, userId },
+    where: { date, userId },
   });
 }

@@ -30,4 +30,4 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE UNIQUE INDEX "Password_userId_key" ON "Password"("userId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "DayOff_date_key" ON "DayOff"("date");
+CREATE UNIQUE INDEX "DayOff_date_userId_key" ON "DayOff"("date", "userId");
