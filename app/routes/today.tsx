@@ -61,7 +61,7 @@ export default function TodayPage() {
         <h1 className="text-xl font-bold sm:text-3xl">
           <Link to="/">Today</Link>
         </h1>
-        <p className="text-xs sm:text-lg">{user.email}</p>
+        <p className="text-md sm:text-lg">{user.email}</p>
         <Form action="/logout" method="post">
           <button
             type="submit"
@@ -71,7 +71,7 @@ export default function TodayPage() {
           </button>
         </Form>
       </header>
-      <main className="drop-shadow-solid relative mt-12 flex justify-center p-4 text-3xl sm:mt-24">
+      <main className="drop-shadow-solid relative mt-12 flex justify-center p-4 text-center text-3xl sm:mt-24 sm:text-5xl">
         <div className="w-11/12 border-2 border-black shadow-solid sm:w-3/5">
           <div className="bg-solitaire-100 p-4 pb-8">
             <dayOff.Form
@@ -85,10 +85,10 @@ export default function TodayPage() {
                 width: "100%",
               }}
             >
-              <h1 className="pb-4 font-bold text-persian-pink-500 sm:pb-8">
+              <h1 className="pb-4 font-bold leading-snug text-persian-pink-500 sm:pb-8">
                 Did you work today?
               </h1>
-              <span className="flex justify-center pb-4 text-6xl sm:pb-8">
+              <span className="flex justify-center pb-4 text-4xl sm:pb-8 sm:text-6xl">
                 {isWorking ? "Yes" : "No"}
               </span>
               <fieldset className="flex justify-center gap-3">
