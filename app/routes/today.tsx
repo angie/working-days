@@ -89,7 +89,7 @@ export default function TodayPage() {
                 Did you work today?
               </h1>
               <span className="flex justify-center pb-4 text-6xl sm:pb-8">
-                {isWorking ? "YES" : "NO"}
+                {isWorking ? "Yes" : "No"}
               </span>
               <fieldset className="flex justify-center gap-3">
                 <label
