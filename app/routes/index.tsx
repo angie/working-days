@@ -15,6 +15,9 @@ export default function Index() {
                   working days
                 </span>
               </h1>
+              <p className="pt-4 text-center md:pt-0 md:text-left">
+                For forgetful freelancers.
+              </p>
               <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
                 {user ? (
                   <Link
