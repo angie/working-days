@@ -3,3 +3,7 @@
 @tailwind utilities;
 
 /* custom styles here */
+
+button {
+  @apply rounded bg-persian-pink-300 py-2 px-4 text-prussian-blue hover:bg-persian-pink-200 focus:bg-blue-400;
+}
