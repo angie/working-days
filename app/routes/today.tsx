@@ -109,30 +109,12 @@ export default function TodayPage() {
                 <label htmlFor="off">No</label>
               </div>
             </fieldset>
-            <input
-              ref={dateRef}
-              name="date"
-              className="flex-1 rounded-md border-2 border-blue-500 px-3 text-lg leading-loose"
-              aria-invalid={actionData?.errors?.date ? true : undefined}
-              aria-errormessage={
-                actionData?.errors?.date ? "date-error" : undefined
-              }
-            />
           </label>
           {actionData?.errors?.date && (
             <div className="pt-1 text-red-700" id="date-error">
               {actionData.errors.date}
             </div>
           )}
-        </div>
-
-        <div className="text-right">
-          <button
-            type="submit"
-            className="rounded bg-blue-500 py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400"
-          >
-            Save
-          </button>
         </div>
       </dayOff.Form>
     </div>
