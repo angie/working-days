@@ -57,11 +57,11 @@ export default function TodayPage() {
 
   return (
     <div className="flex h-full min-h-screen flex-col">
-      <header className="flex items-center justify-between bg-zinc-800 p-4 text-white">
-        <h1 className="text-3xl font-bold">
-          <Link to=".">Today</Link>
+      <header className="flex items-center justify-between bg-prussian-blue-900 p-4 text-solitaire-50">
+        <h1 className="text-xl font-bold sm:text-3xl">
+          <Link to="/">Today</Link>
         </h1>
-        <p>{user.email}</p>
+        <p className="text-xs sm:text-lg">{user.email}</p>
         <Form action="/logout" method="post">
           <button
             type="submit"
@@ -72,12 +72,13 @@ export default function TodayPage() {
         </Form>
       </header>
       <main className="drop-shadow-solid relative mt-12 flex justify-center p-4 text-3xl sm:mt-24">
-        <div className="w-11/12 rounded-lg border-2 border-black shadow-solid sm:w-3/5">
-          <div className="p-4 pb-8">
+        <div className="w-11/12 border-2 border-black shadow-solid sm:w-3/5">
+          <div className="bg-solitaire-100 p-4 pb-8">
             <dayOff.Form
               method="post"
               action="/day-off/add"
               style={{
+                alignItems: "center",
                 display: "flex",
                 flexDirection: "column",
                 gap: 8,

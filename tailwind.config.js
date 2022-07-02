@@ -3,6 +3,9 @@ module.exports = {
   content: ["./app/**/*.{ts,tsx,jsx,js}"],
   theme: {
     extend: {
+      backgroundImage: {
+        "mesh-bg": "url('/mesh-bg.png')",
+      },
       boxShadow: {
         solid: "6px 6px 0px 0px #000000",
       },
@@ -200,6 +203,7 @@ module.exports = {
         "pa-dither": ["puffin-arcade-dither", "sans-serif"],
         "pa-regular": ["puffin-arcade-regular", "sans-serif"],
         "pa-yoko": ["puffin-arcade-yoko", "sans-serif"],
+        "space-mono": ["Space Mono", "monospace"],
       },
     },
   },

@@ -19,7 +19,16 @@ import { getUser } from "./session.server";
 export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: tailwindStylesheetUrl },
-    { rel: "stylesheet", href: "https://use.typekit.net/ycc4abi.css" },
+    // google fonts preconnect
+    {
+      rel: "preconnect",
+      href: "https://fonts.googleapis.com",
+      crossorigin: true,
+    },
+    {
+      rel: "stylesheet",
+      href: "https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap",
+    },
   ];
 };
 
@@ -41,12 +50,15 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function App() {
   return (
-    <html lang="en" className="h-full bg-solitaire-100 text-prussian-blue-800">
+    <html
+      lang="en"
+      className="h-full bg-solitaire-100 font-space-mono text-prussian-blue-800"
+    >
       <head>
         <Meta />
         <Links />
       </head>
-      <body className="h-full">
+      <body className="h-full bg-mesh-bg">
         <Outlet />
         <ScrollRestoration />
         <Scripts />
