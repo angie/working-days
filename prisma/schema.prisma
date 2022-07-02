@@ -16,6 +16,7 @@ model User {
 
   password Password?
   daysOff    DayOff[]
+  notes    Note[]
 }
 
 model Password {
@@ -35,4 +36,16 @@ model DayOff {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String
   @@unique([date, userId])
+}
+
+model Note {
+  id    String @id @default(cuid())
+  title String
+  body  String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String
 }
