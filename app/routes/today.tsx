@@ -1,18 +1,12 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import {
-  Form,
-  Link,
-  useActionData,
-  useFetcher,
-  useLoaderData,
-} from "@remix-run/react";
+import { useActionData, useFetcher, useLoaderData } from "@remix-run/react";
 import * as React from "react";
 
+import { NavBar } from "~/components/navbar";
 import { getToday } from "~/date-utils";
 import { getDayOffByDate } from "~/models/day-off.server";
 import { requireUserId } from "~/session.server";
-import { useUser } from "~/utils";
 
 type ActionData = {
   errors?: {
@@ -36,7 +30,6 @@ export default function TodayPage() {
   const actionData = useActionData() as ActionData;
   const dateRef = React.useRef<HTMLInputElement>(null);
   const { isWorking } = useLoaderData() as LoaderData;
-  const user = useUser();
   const dayOff = useFetcher();
 
   const onChangeHandler = (event: React.FormEvent<HTMLInputElement>): void => {
@@ -57,20 +50,7 @@ export default function TodayPage() {
 
   return (
     <div className="flex h-full min-h-screen flex-col">
-      <header className="flex items-center justify-between bg-prussian-blue-900 p-4 text-solitaire-50">
-        <h1 className="text-xl font-bold sm:text-3xl">
-          <Link to="/">Today</Link>
-        </h1>
-        <p className="text-md sm:text-lg">{user.email}</p>
-        <Form action="/logout" method="post">
-          <button
-            type="submit"
-            className="rounded bg-pink-600 py-2 px-4 text-blue-100 hover:bg-blue-500 active:bg-blue-600"
-          >
-            Logout
-          </button>
-        </Form>
-      </header>
+      <NavBar />
       <main className="drop-shadow-solid relative mt-12 flex justify-center p-4 text-center text-3xl sm:mt-24 sm:text-5xl">
         <div className="w-11/12 border-2 border-black shadow-solid sm:w-3/5">
           <div className="bg-solitaire-50 p-4 pb-8">
