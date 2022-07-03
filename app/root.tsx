@@ -55,7 +55,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="h-full bg-solitaire-100 bg-mesh-bg bg-no-repeat font-space-mono text-prussian-blue-800">
+      <body className="h-full bg-solitaire-100 bg-mesh-bg bg-cover bg-no-repeat font-space-mono text-prussian-blue-800">
         <Outlet />
         <ScrollRestoration />
         <Scripts />
