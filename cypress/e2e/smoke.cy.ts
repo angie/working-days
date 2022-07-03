@@ -30,14 +30,14 @@ describe("smoke tests", () => {
 
     cy.findByRole("link", { name: /did you work today?/i }).click();
 
-    cy.findByText("YES");
+    cy.findByText(/yes/i);
     cy.findByRole("checkbox", { name: /did you work today?/i }).click({
       force: true,
     });
-    cy.findByText("NO");
+    cy.findByText(/no/i);
     cy.findByRole("checkbox", { name: /did you work today?/i }).click({
       force: true,
     });
-    cy.findByText("YES");
+    cy.findByText(/yes/i);
   });
 });
