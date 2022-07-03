@@ -24,6 +24,26 @@ export function getDayOffByDate({
   });
 }
 
+// get all days off for a user between a given date range
+export function getDaysOffBetween({
+  userId,
+  startDate,
+  endDate,
+}: Pick<DayOff, "userId"> & {
+  startDate: Date;
+  endDate: Date;
+}) {
+  return prisma.dayOff.findMany({
+    where: {
+      userId,
+      date: {
+        gte: startDate,
+        lte: endDate,
+      },
+    },
+  });
+}
+
 export function getDaysOff({ userId }: { userId: User["id"] }) {
   return prisma.dayOff.findMany({
     where: { userId },

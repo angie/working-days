@@ -39,5 +39,8 @@ describe("smoke tests", () => {
       force: true,
     });
     cy.findByText(/yes/i);
+
+    cy.visit("/months");
+    cy.findByText(/you have worked 1 day this month./i).click();
   });
 });
