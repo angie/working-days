@@ -46,7 +46,9 @@ describe("smoke tests", () => {
 
   it("should show the correct calendar view", () => {
     cy.login();
-    cy.visit("/");
+    cy.visit("/today");
+
+    cy.findByText(/view months/i).click();
 
     cy.visit("/months/2022-06");
 

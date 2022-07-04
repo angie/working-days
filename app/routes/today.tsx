@@ -74,9 +74,11 @@ export default function TodayPage() {
             </label>
           </fieldset>
         </dayOff.Form>
-        <div className="pt-14">
+        <div className="pt-14 text-3xl">
           <Link to="/months">
-            <button>Month view</button>
+            <button className="bg-transparent underline hover:bg-persian-pink-400">
+              View months
+            </button>
           </Link>
         </div>
       </Main>

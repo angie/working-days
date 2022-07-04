@@ -9,7 +9,7 @@ export function NavBar() {
       <Form action="/logout" method="post">
         <button
           type="submit"
-          className="rounded bg-pink-600 py-2 px-4 text-blue-100 hover:bg-blue-500 active:bg-blue-600"
+          className=" bg-persian-pink-500 py-2 px-4 text-black hover:bg-morning-glory active:bg-morning-glory"
         >
           Logout
         </button>
