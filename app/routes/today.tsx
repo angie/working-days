@@ -1,6 +1,6 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { Form, useFetcher, useLoaderData } from "@remix-run/react";
+import { useFetcher, useLoaderData, Link } from "@remix-run/react";
 import * as React from "react";
 
 import { Main } from "~/components/main";
@@ -39,7 +39,7 @@ export default function TodayPage() {
     <div className="flex h-full min-h-screen flex-col">
       <NavBar />
       <Main>
-        <Form
+        <dayOff.Form
           style={{
             alignItems: "center",
             display: "flex",
@@ -73,7 +73,12 @@ export default function TodayPage() {
               </span>
             </label>
           </fieldset>
-        </Form>
+        </dayOff.Form>
+        <div className="pt-14">
+          <Link to="/months">
+            <button>Month view</button>
+          </Link>
+        </div>
       </Main>
     </div>
   );

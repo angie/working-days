@@ -41,6 +41,28 @@ describe("smoke tests", () => {
     cy.findByText(/yes/i);
 
     cy.visit("/months");
-    cy.findByText(/you have worked 1 day this month./i).click();
+    cy.findByText(/you have worked \d* days? this month./i);
+  });
+
+  it("should show the correct calendar view", () => {
+    cy.login();
+    cy.visit("/");
+
+    cy.visit("/months/2022-06");
+
+    cy.findByText(/you have worked 22 days this month./i);
+    cy.findByText(/there are 22 working days total in june 2022/i);
+
+    cy.findByText(/30/i).click();
+    cy.findByText(/you have worked 21 days this month./i);
+
+    cy.findByText(/30/i).click();
+    cy.findByText(/you have worked 22 days this month./i);
+
+    cy.findByRole("button", { name: /previous month/i }).click();
+    cy.findAllByText(/may 2022/i);
+
+    cy.findByRole("button", { name: /previous year/i }).click();
+    cy.findAllByText(/may 2021/i);
   });
 });
