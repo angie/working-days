@@ -1,18 +1,27 @@
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 import type { CalendarTileProperties } from "react-calendar";
 import type { DayOff } from "~/models/day-off.server";
 
-// dayjs.extend(utc);
+dayjs.extend(utc);
+
+export { dayjs };
+
+export const dayjsutc = (date?: dayjs.ConfigType): dayjs.Dayjs => {
+  const utc = dayjs.utc(date);
+  // console.log("utc :>> ", utc.format());
+  return utc;
+};
 
 export const getToday = (): Date => {
-  return dayjs().startOf("day").toDate();
+  return dayjsutc().startOf("day").toDate();
 };
 
 export const getMonthStartAndEnd = (
   date: Date
 ): [start: dayjs.Dayjs, end: dayjs.Dayjs] => {
-  const start = dayjs(date).startOf("month");
-  const end = dayjs(date).endOf("month");
+  const start = dayjsutc(date).startOf("month");
+  const end = dayjsutc(date).endOf("month");
   return [start, end];
 };
 
@@ -45,7 +54,7 @@ export const getAllWorkingDays = (month: Date) => {
 
 export const getPossibleWorkingDays = (month: Date) => {
   const [, endDate] = getMonthStartAndEnd(month);
-  const endOfToday = dayjs().endOf("day");
+  const endOfToday = dayjsutc().endOf("day");
   // either end of month or endOfToday, whichever is earlier
   const isCurrentMonth =
     endDate.isSame(endOfToday, "month") && endDate.isAfter(endOfToday)
@@ -54,7 +63,7 @@ export const getPossibleWorkingDays = (month: Date) => {
 
   const possibleWorkingDays = getAllWorkingDays(month);
   const possibleWorkingDaysUntilToday = possibleWorkingDays.filter((day) =>
-    dayjs(day).isBefore(isCurrentMonth)
+    dayjsutc(day).isBefore(isCurrentMonth)
   );
   return possibleWorkingDaysUntilToday;
 };
@@ -66,17 +75,13 @@ export const getActualWorkingDays = (month: Date, daysOff: DayOff[]) => {
 };
 
 export const getMonthYear = (date: Date) => {
-  return dayjs(date).format("MMMM YYYY");
-};
-
-export const getDayJs = (date: Date) => {
-  return dayjs(date);
+  return dayjsutc(date).format("MMMM YYYY");
 };
 
 export const isDayOff = (date: Date, daysOff: DayOff[]) => {
-  const day = dayjs(date);
+  const day = dayjsutc(date);
   const dayOff = daysOff.find((dayOff) => {
-    return dayjs(dayOff.date).isSame(day, "day");
+    return dayjsutc(dayOff.date).isSame(day, "day");
   });
 
   return dayOff !== undefined;
@@ -94,10 +99,10 @@ export const getTileClassName = (
 
   let className = "";
 
-  const day = dayjs(date);
-  const isToday = dayjs().isSame(day, "day");
+  const day = dayjsutc(date);
+  const isToday = dayjsutc().isSame(day, "day");
 
-  if (!isDayOff(date, daysOff) && !day.isAfter(dayjs())) {
+  if (!isDayOff(date, daysOff) && !day.isAfter(dayjsutc())) {
     className += " bg-red-200";
   }
   if (view === "month" && !isWeekday(day)) {
