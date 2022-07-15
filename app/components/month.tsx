@@ -2,7 +2,8 @@ import { useFetcher, useNavigate } from "@remix-run/react";
 import * as React from "react";
 import Calendar from "react-calendar";
 
-import { getTileClassName, isDayOff } from "~/date-utils";
+import { dayjsutc, getTileClassName, isDayOff } from "~/date-utils";
+
 import type { DayOff } from "~/models/day-off.server";
 import { getMonthRoute } from "~/months-utils";
 
@@ -18,9 +19,10 @@ export const Month: React.FC<{
 
   const onClickDayHandler = (date: Date): void => {
     const action = isDayOff(date, daysOffList) ? "delete" : "add";
+    const dateString = dayjsutc(date).startOf("day").toJSON();
 
     fetcher.submit(
-      { date: date.toJSON() },
+      { date: dateString },
       {
         method: "post",
         action: `/day-off/${action}`,
@@ -31,7 +33,6 @@ export const Month: React.FC<{
   return (
     <>
       <div className="flex justify-center pb-6 text-sm md:text-lg">
-        {/* TODO: fix issue with aria-label differences on server and client */}
         <Calendar
           activeStartDate={new Date(startDate)}
           nextAriaLabel="Next month"

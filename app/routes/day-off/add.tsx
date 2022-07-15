@@ -1,6 +1,6 @@
 import type { ActionFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { dayjsutc, getToday } from "~/date-utils";
+import { getToday } from "~/date-utils";
 import { addDayOff } from "~/models/day-off.server";
 import { requireUserId } from "~/session.server";
 
@@ -14,9 +14,7 @@ export const action: ActionFunction = async ({ request }) => {
   console.log("requestDate :>> ", requestDate);
 
   const dateToToggle = data.has("date")
-    ? dayjsutc(data.get("date") as string)
-        .startOf("day")
-        .toDate()
+    ? new Date(data.get("date") as string)
     : getToday();
 
   console.log("dateToToggle :>> ", dateToToggle);
