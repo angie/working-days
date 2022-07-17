@@ -1,8 +1,10 @@
 import {
-  getMonthStartAndEndDateObject,
-  getToday,
+  convertUtcToLocal,
+  dayjs,
   getAllWorkingDays,
+  getMonthStartAndEndDateObject,
   getPossibleWorkingDays,
+  getToday,
 } from "./date-utils";
 
 afterEach(() => {
@@ -27,7 +29,7 @@ test("getMonthStartAndEnd should return the start and end dates for the current 
 });
 
 test("getMonthStartAndEndDateObject should return the start and end dates of the month", () => {
-  const date = new Date("2018-04-20 10:00:00");
+  const date = new Date("2018-04-20 10:00:00Z");
 
   const [start, end] = getMonthStartAndEndDateObject(date);
   expect(start).toEqual(new Date("2018-04-01"));
@@ -35,7 +37,7 @@ test("getMonthStartAndEndDateObject should return the start and end dates of the
 });
 
 test("getAllWorkingDays should return all working days in a month", () => {
-  const month = new Date("2019-01-01");
+  const month = dayjs("2019-01-01").tz("Asia/Tokyo").toDate();
   const workingDays = [
     new Date("2019-01-01"),
     new Date("2019-01-02"),
@@ -91,4 +93,12 @@ test("getAllPossibleWorkingDays should return all working days for a month in th
   vi.setSystemTime(new Date("2019-02-06"));
 
   expect(getPossibleWorkingDays(new Date("2022-02-01"))).toHaveLength(20);
+});
+
+test("convertUtcToLocal should convert UTC date to local without offsetting time", () => {
+  const utc = dayjs.utc("2022-02-01");
+
+  expect(convertUtcToLocal(utc.toDate())).toEqual(
+    new Date("2022-02-01T00:00:00")
+  );
 });

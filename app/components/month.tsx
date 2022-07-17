@@ -2,7 +2,13 @@ import { useFetcher, useNavigate } from "@remix-run/react";
 import * as React from "react";
 import Calendar from "react-calendar";
 
-import { dayjsutc, getTileClassName, isDayOff } from "~/date-utils";
+import {
+  convertUtcToLocal,
+  dayjs,
+  getMonthYear,
+  getTileClassName,
+  isDayOff,
+} from "~/date-utils";
 
 import type { DayOff } from "~/models/day-off.server";
 import { getMonthRoute } from "~/months-utils";
@@ -11,15 +17,17 @@ export const Month: React.FC<{
   daysOffList: DayOff[];
   actualWorkingDays: Date[];
   allWorkingDays: Date[];
-  month: string;
   startDate: Date;
-}> = ({ daysOffList, actualWorkingDays, allWorkingDays, month, startDate }) => {
+}> = ({ daysOffList, actualWorkingDays, allWorkingDays, startDate }) => {
   const fetcher = useFetcher();
   const navigate = useNavigate();
+  const daysOffLocal = daysOffList.map((d) =>
+    convertUtcToLocal(new Date(d.date))
+  );
 
   const onClickDayHandler = (date: Date): void => {
-    const action = isDayOff(date, daysOffList) ? "delete" : "add";
-    const dateString = dayjsutc(date).startOf("day").toJSON();
+    const action = isDayOff(date, daysOffLocal) ? "delete" : "add";
+    const dateString = dayjs(date).tz("UTC", true).toJSON();
 
     fetcher.submit(
       { date: dateString },
@@ -34,7 +42,7 @@ export const Month: React.FC<{
     <>
       <div className="flex justify-center pb-6 text-sm md:text-lg">
         <Calendar
-          activeStartDate={new Date(startDate)}
+          activeStartDate={convertUtcToLocal(new Date(startDate))}
           nextAriaLabel="Next month"
           next2AriaLabel="Next year"
           prevAriaLabel="Previous month"
@@ -52,7 +60,7 @@ export const Month: React.FC<{
           }}
           showNeighboringMonth={false}
           tileClassName={(tileProps) => {
-            return getTileClassName(tileProps, daysOffList);
+            return getTileClassName(tileProps, daysOffLocal);
           }}
           tileDisabled={({ date, view }) => {
             const isWeekend =
@@ -67,7 +75,8 @@ export const Month: React.FC<{
           {actualWorkingDays.length === 1 ? "day" : "days"} this month.
         </p>
         <p>
-          There are {allWorkingDays.length} working days total in {month}.
+          There are {allWorkingDays.length} working days total in{" "}
+          {getMonthYear(startDate)}.
         </p>
       </div>
     </>

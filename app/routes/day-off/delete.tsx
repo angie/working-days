@@ -1,6 +1,6 @@
 import type { ActionFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { dayjsutc, getToday } from "~/date-utils";
+import { dayjs, getToday } from "~/date-utils";
 import { deleteDayOff } from "~/models/day-off.server";
 import { requireUserId } from "~/session.server";
 
@@ -11,7 +11,8 @@ export const action: ActionFunction = async ({ request }) => {
   const userId = await requireUserId(request);
 
   const date = data.has("date")
-    ? dayjsutc(data.get("date") as string)
+    ? dayjs(data.get("date") as string)
+        .tz("UTC", true)
         .startOf("day")
         .toDate()
     : getToday();
