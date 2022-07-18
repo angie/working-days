@@ -15,8 +15,9 @@ model User {
   updatedAt DateTime @updatedAt
 
   password Password?
-  daysOff    DayOff[]
+  daysOff  DayOff[]
   notes    Note[]
+  months   Month[]
 }
 
 model Password {
@@ -27,8 +28,21 @@ model Password {
 }
 
 model DayOff {
-  id    String @id @default(cuid())
+  id   String   @id @default(cuid())
   date DateTime
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String
+  @@unique([date, userId])
+}
+
+model Month {
+  id    String   @id @default(cuid())
+  date DateTime
+  isLocked Boolean @default(true)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

@@ -67,4 +67,17 @@ describe("smoke tests", () => {
     cy.findByRole("button", { name: /previous year/i }).click();
     cy.findAllByText(/may 2021/i);
   });
+
+  it("should allow you to lock and unlock a month for editing", () => {
+    cy.login();
+    cy.visit("/months/2022-06");
+
+    cy.findByText(/click to prevent changes/i).click();
+    cy.findByText(/30/i).click();
+    cy.findByText(/you have worked 22 days this month./i);
+
+    cy.findByText(/click to allow changes/i).click();
+    cy.findByText(/30/i).click();
+    cy.findByText(/you have worked 21 days this month./i);
+  });
 });

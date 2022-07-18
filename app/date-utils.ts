@@ -1,7 +1,6 @@
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
-import type { CalendarTileProperties } from "react-calendar";
 import type { DayOff } from "~/models/day-off.server";
 
 dayjs.extend(utc);
@@ -28,7 +27,7 @@ export const getMonthStartAndEndDateObject = (
   return [start.toDate(), end.toDate()];
 };
 
-const isWeekday = (date: dayjs.Dayjs): boolean => {
+export const isWeekday = (date: dayjs.Dayjs): boolean => {
   return date.day() !== 0 && date.day() !== 6;
 };
 
@@ -84,34 +83,6 @@ export const isDayOff = (date: Date, daysOff: Date[]) => {
   });
 
   return dayOff !== undefined;
-};
-
-export const getTileClassName = (
-  tileProps: CalendarTileProperties,
-  daysOff: Date[]
-): string => {
-  const { date, view } = tileProps;
-
-  if (view !== "month") {
-    return "";
-  }
-
-  let className = "";
-
-  const day = dayjs(date);
-  const isToday = dayjs().isSame(day, "day");
-
-  if (!isDayOff(date, daysOff) && !day.isAfter(dayjs())) {
-    className += " bg-red-200";
-  }
-  if (view === "month" && !isWeekday(day)) {
-    className += " opacity-25";
-  }
-
-  if (isToday) {
-    // add some kind of circle around today
-  }
-  return className;
 };
 
 export const convertUtcToLocal = (date: Date): Date => {
