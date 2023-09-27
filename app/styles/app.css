@@ -9,7 +9,7 @@ button {
 }
 
 .react-calendar__navigation {
-  @apply pb-2 text-2xl sm:pb-4 sm:text-4xl;
+  @apply pb-2 sm:pb-4;
 }
 
 .react-calendar button {

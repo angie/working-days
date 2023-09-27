@@ -1,14 +1,24 @@
-# Remix Indie Stack
+# working days
 
-![The Remix Indie Stack](https://repository-images.githubusercontent.com/465928257/a241fa49-bd4d-485a-a2a5-5cb8e4ee0abf)
+Cloned from the Remix Indie stack. ([Remix Stacks](https://remix.run/stacks))
 
-Learn more about [Remix Stacks](https://remix.run/stacks).
+## Motivation
 
-```
-npx create-remix --template remix-run/indie-stack
-```
+Sometimes I forget which days I worked for a client when it comes to submitting timesheets and raising invoices. This app is a simple way to keep track of the days I worked for a client, as well as an opportunity to learn Remix.
+
+## Screenshots
+
+<details>
+<img src="./docs/login.png" width="300">
+
+<img src="./docs/single-day.png" width="300">
+
+<img src="./docs/month-view.png" width="300">
+</details>
 
 ## What's in the stack
+
+<details>
 
 - [Fly app deployment](https://fly.io) with [Docker](https://www.docker.com/)
 - Production-ready [SQLite Database](https://sqlite.org)
@@ -24,17 +34,9 @@ npx create-remix --template remix-run/indie-stack
 - Linting with [ESLint](https://eslint.org)
 - Static Types with [TypeScript](https://typescriptlang.org)
 
-Not a fan of bits of the stack? Fork it, change it, and use `npx create-remix --template your/repo`! Make it your own.
-
-## Quickstart
-
-Click this button to create a [Gitpod](https://gitpod.io) workspace with the project set up and Fly pre-installed
-
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/from-referrer/)
-
 ## Development
 
-- Initial setup: _If you just generated this project, this step has been done for you._
+- Initial setup:
 
   ```sh
   npm run setup
@@ -55,11 +57,9 @@ The database seed script creates a new user with some data you can use to get st
 
 ### Relevant code:
 
-This is a pretty simple note-taking app, but it's a good example of how you can build a full stack app with Prisma and Remix. The main functionality is creating users, logging in and out, and creating and deleting notes.
-
 - creating users, and logging in and out [./app/models/user.server.ts](./app/models/user.server.ts)
 - user sessions, and verifying them [./app/session.server.ts](./app/session.server.ts)
-- creating, and deleting notes [./app/models/note.server.ts](./app/models/note.server.ts)
+- creating and deleting days off [./app/models/day-off.server.ts](./app/models/day-off.server.ts)
 
 ## Deployment
 
@@ -170,3 +170,5 @@ This project uses ESLint for linting. That is configured in `.eslintrc.js`.
 ### Formatting
 
 We use [Prettier](https://prettier.io/) for auto-formatting in this project. It's recommended to install an editor plugin (like the [VSCode Prettier plugin](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)) to get auto-formatting on save. There's also a `npm run format` script you can run to format all files in the project.
+
+</details>

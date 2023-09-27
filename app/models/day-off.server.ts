@@ -4,17 +4,6 @@ import { prisma } from "~/db.server";
 
 export type { DayOff } from "@prisma/client";
 
-export function getNote({
-  id,
-  userId,
-}: Pick<DayOff, "id"> & {
-  userId: User["id"];
-}) {
-  return prisma.dayOff.findFirst({
-    where: { id, userId },
-  });
-}
-
 export function getDayOffByDate({
   userId,
   date,
